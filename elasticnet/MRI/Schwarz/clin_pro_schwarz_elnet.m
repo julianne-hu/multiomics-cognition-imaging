@@ -10,7 +10,6 @@ mri=innerjoin(mri,demo);
 proteomics=readtable('mean_imputed_olink_i0.csv');
 merged_data=innerjoin(proteomics,mri);
 
-%% do later 
 age=merged_data.p21003_i2;
 sex=merged_data.p31;
 site=merged_data.p54_i2;
@@ -153,8 +152,7 @@ for i=1:10 %8
     r_x_split_prot(i)=corr(yhat, yTest);
 end
 
-%% Saving results 
 r_xval_prot=corr(yhat_all_prot, ytest_all_prot)
 
-%% he
+%% Saving results 
 save clinical_prot_elnet_schwarz.mat
