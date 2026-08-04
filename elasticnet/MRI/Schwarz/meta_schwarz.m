@@ -6,7 +6,6 @@ mri=readtable('mri_v2_schwarz_final.csv');
 demo=readtable('demographics_v2.csv');
 mri=innerjoin(mri, demo);
 
-%% Just for metabolics 
 metabolics=readtable('mean_imputed_metabolomic_i0_v2.csv');
 
 %% extract ids and replace with actual names
@@ -40,8 +39,6 @@ metabolics.Properties.VariableNames(2:252) = cellstr(new_names);
 %fields 23474 : 23467
 
 merged_data=innerjoin(metabolics,mri);
-
-%% pausing for sanity check
 
 clear cognitive metabolics demo;
 age=merged_data.p21003_i2;
@@ -190,22 +187,7 @@ r_xval_meta=corr(yhat_all_meta, ytest_all_meta)
 %% saving 
 
 save meta_elnet_schwarz.mat
-%% split
 
-r_yhat.^2
-
-r_xval.^2
-
-r_x_split_clin
-
-r_x_split_meta
-figure(12);
-for test=1:4;
-subplot(2,2,test);
-y=mean(r_x_split_clin(test,:));
-err=std(r_x_split_clin(test,:));
-errorbar(1, y, err,"square"); xlim([0 3])
-y=mean(r_x_split_meta(test,:));
 err=std(r_x_split_meta(test,:));
 hold on; errorbar(1.5, y, err,"square"); xlim([0 3]); ylim([0.25 0.5])
 end
